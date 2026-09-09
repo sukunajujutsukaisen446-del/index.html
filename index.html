@@ -1,0 +1,576 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funil de Vendas</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    color: #111;
+}
+
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.page.active {
+    display: block;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.hero {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 70px 20px;
+    border-radius: 20px;
+}
+
+.hero h1 {
+    font-size: 45px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #ddd;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 18px 35px;
+    border: none;
+    border-radius: 10px;
+    background: #00c853;
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: scale(1.03);
+    background: #00a844;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    margin-top: 25px;
+    box-shadow: 0 5px 25px rgba(0,0,0,.08);
+}
+
+.price {
+    font-size: 38px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 20px;
+}
+
+.countdown {
+    background: #ff1744;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.features {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.features li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.checkout input {
+    width: 100%;
+    padding: 15px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.bump {
+    background: #fff8d6;
+    border: 2px dashed #e0b000;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.bump label {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    cursor: pointer;
+}
+
+.bump input {
+    width: 20px;
+    height: 20px;
+}
+
+.upsell {
+    text-align: center;
+}
+
+.upsell h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.warning {
+    background: #fff0f0;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    color: #b00020;
+}
+
+.success {
+    text-align: center;
+}
+
+.success h1 {
+    font-size: 45px;
+    color: #00a844;
+}
+
+.small-btn {
+    background: transparent;
+    color: #555;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: underline;
+}
+
+@media(max-width:600px) {
+    .hero h1,
+    .upsell h1,
+    .success h1 {
+        font-size: 32px;
+    }
+
+    .price {
+        font-size: 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- PÁGINA DE VENDAS -->
+<!-- ========================= -->
+
+<section id="sales" class="page active">
+    <div class="container">
+
+        <div class="hero">
+            <h1>🚀 Seu Produto Incrível</h1>
+
+            <p>
+                Aprenda uma nova habilidade e transforme seus resultados.
+            </p>
+
+            <div class="countdown">
+                Oferta termina em:
+                <span id="timer">10:00</span>
+            </div>
+
+            <button class="btn" onclick="goTo('checkout')">
+                QUERO COMEÇAR AGORA
+            </button>
+        </div>
+
+        <div class="card">
+            <h2>O que você vai receber:</h2>
+
+            <ul class="features">
+                <li>✅ Acesso completo ao conteúdo</li>
+                <li>✅ Material exclusivo</li>
+                <li>✅ Atualizações futuras</li>
+                <li>✅ Suporte</li>
+                <li>✅ Acesso imediato</li>
+            </ul>
+
+            <div class="price">
+                <span class="old-price">R$ 197,00</span><br>
+                R$ 47,00
+            </div>
+
+            <button class="btn" onclick="goTo('checkout')">
+                GARANTIR MINHA VAGA
+            </button>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ========================= -->
+<!-- CHECKOUT -->
+<!-- ========================= -->
+
+<section id="checkout" class="page">
+    <div class="container">
+
+        <div class="card checkout">
+
+            <h1>🛒 Finalizar compra</h1>
+
+            <p style="margin-top:10px;">
+                Preencha seus dados para continuar.
+            </p>
+
+            <input id="name" type="text" placeholder="Seu nome">
+
+            <input id="email" type="email" placeholder="Seu melhor e-mail">
+
+            <input type="text" placeholder="Número do cartão">
+
+            <input type="text" placeholder="Validade">
+
+            <input type="text" placeholder="CVV">
+
+            <!-- ORDER BUMP -->
+
+            <div class="bump">
+
+                <label>
+                    <input
+                        type="checkbox"
+                        id="orderBump"
+                    >
+
+                    <span>
+                        <strong>🔥 SIM! Quero adicionar o Order Bump!</strong>
+
+                        <br><br>
+
+                        Adicione este conteúdo extra por apenas
+                        <strong>R$ 17,00</strong>.
+                    </span>
+                </label>
+
+            </div>
+
+            <div class="price">
+                Total:
+                R$ <span id="total">47,00</span>
+            </div>
+
+            <button class="btn" onclick="comprar()">
+                🔒 COMPRAR AGORA
+            </button>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ========================= -->
+<!-- UPSELL 1 -->
+<!-- ========================= -->
+
+<section id="upsell1" class="page">
+    <div class="container">
+
+        <div class="card upsell">
+
+            <h1>🔥 ESPERE!</h1>
+
+            <p>
+                Sua compra foi aprovada!
+            </p>
+
+            <br>
+
+            <h2>
+                Temos uma oferta especial para você.
+            </h2>
+
+            <p style="margin-top:15px;">
+                Adicione o Produto Premium por apenas:
+            </p>
+
+            <div class="price">
+                R$ 67,00
+            </div>
+
+            <button class="btn" onclick="goTo('success')">
+                SIM, QUERO ESSA OFERTA
+            </button>
+
+            <br>
+
+            <button class="small-btn" onclick="goTo('downsell1')">
+                Não quero, continuar sem essa oferta
+            </button>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ========================= -->
+<!-- DOWNSELL 1 -->
+<!-- ========================= -->
+
+<section id="downsell1" class="page">
+    <div class="container">
+
+        <div class="card upsell">
+
+            <h1>😮 TEMOS UMA ÚLTIMA CONDIÇÃO</h1>
+
+            <p>
+                Tudo bem se a oferta anterior não era para você.
+            </p>
+
+            <br>
+
+            <h2>
+                Que tal levar o mesmo bônus com desconto?
+            </h2>
+
+            <div class="price">
+                R$ 37,00
+            </div>
+
+            <button class="btn" onclick="goTo('success')">
+                SIM, QUERO POR R$ 37
+            </button>
+
+            <br>
+
+            <button class="small-btn" onclick="goTo('downsell2')">
+                Não quero essa oferta
+            </button>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ========================= -->
+<!-- DOWNSELL 2 -->
+<!-- ========================= -->
+
+<section id="downsell2" class="page">
+    <div class="container">
+
+        <div class="card upsell">
+
+            <h1>🎁 ÚLTIMA OFERTA</h1>
+
+            <p>
+                Essa é realmente a última oportunidade.
+            </p>
+
+            <br>
+
+            <h2>
+                Leve uma versão simplificada por apenas:
+            </h2>
+
+            <div class="price">
+                R$ 19,00
+            </div>
+
+            <button class="btn" onclick="goTo('success')">
+                QUERO POR R$ 19
+            </button>
+
+            <br>
+
+            <button class="small-btn" onclick="goTo('success')">
+                Não quero, finalizar minha compra
+            </button>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ========================= -->
+<!-- COMPRA FINALIZADA -->
+<!-- ========================= -->
+
+<section id="success" class="page">
+    <div class="container">
+
+        <div class="card success">
+
+            <h1>🎉 Compra concluída!</h1>
+
+            <p style="margin-top:20px;">
+                Obrigado pela sua compra!
+            </p>
+
+            <p style="margin-top:10px;">
+                Enviamos as informações de acesso para seu e-mail.
+            </p>
+
+            <button class="btn" onclick="goTo('sales')">
+                VOLTAR PARA O INÍCIO
+            </button>
+
+        </div>
+
+    </div>
+</section>
+
+
+<script>
+
+// =============================
+// SISTEMA DE NAVEGAÇÃO
+// =============================
+
+function goTo(page) {
+
+    document.querySelectorAll(".page")
+        .forEach(p => p.classList.remove("active"));
+
+    document.getElementById(page)
+        .classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+// =============================
+// ORDER BUMP + TOTAL
+// =============================
+
+const bump = document.getElementById("orderBump");
+
+bump.addEventListener("change", function() {
+
+    const total = document.getElementById("total");
+
+    if (this.checked) {
+        total.textContent = "64,00";
+    } else {
+        total.textContent = "47,00";
+    }
+
+});
+
+
+// =============================
+// COMPRA
+// =============================
+
+function comprar() {
+
+    const name =
+        document.getElementById("name").value;
+
+    const email =
+        document.getElementById("email").value;
+
+    if (!name || !email) {
+
+        alert("Preencha seu nome e e-mail.");
+
+        return;
+    }
+
+    /*
+        $comprou
+
+        Aqui simulamos que a compra
+        foi aprovada.
+
+        Em um checkout real,
+        essa confirmação viria
+        do gateway de pagamento.
+    */
+
+    const comprou = true;
+
+    if (comprou) {
+
+        goTo("upsell1");
+
+    }
+
+}
+
+
+// =============================
+// COUNTDOWN
+// =============================
+
+let tempo = 600;
+
+setInterval(function() {
+
+    let minutos =
+        Math.floor(tempo / 60);
+
+    let segundos =
+        tempo % 60;
+
+    segundos =
+        segundos < 10
+        ? "0" + segundos
+        : segundos;
+
+    document.getElementById("timer")
+        .textContent =
+        minutos + ":" + segundos;
+
+    if (tempo > 0) {
+        tempo--;
+    }
+
+}, 1000);
+
+</script>
+
+</body>
+</html>
+```
