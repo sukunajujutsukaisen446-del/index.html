@@ -1,576 +1,1150 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Funil de Vendas</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
+  <title>WEB STARTER — Crie Seu Primeiro Site</title>
 
-body {
-    background: #f5f5f5;
-    color: #111;
-}
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-.page {
-    display: none;
-    min-height: 100vh;
-    padding: 40px 20px;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.page.active {
-    display: block;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.container {
-    max-width: 900px;
-    margin: auto;
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #07070b;
+      color: #fff;
+      line-height: 1.6;
+    }
 
-.hero {
-    background: #111;
-    color: white;
-    text-align: center;
-    padding: 70px 20px;
-    border-radius: 20px;
-}
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
 
-.hero h1 {
-    font-size: 45px;
-    margin-bottom: 20px;
-}
+    /* =========================
+       HEADER
+    ========================= */
 
-.hero p {
-    font-size: 20px;
-    color: #ddd;
-}
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(7, 7, 11, 0.85);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
 
-.btn {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 18px 35px;
-    border: none;
-    border-radius: 10px;
-    background: #00c853;
-    color: white;
-    font-size: 19px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: .2s;
-}
+    .nav {
+      max-width: 1150px;
+      margin: auto;
+      height: 70px;
+      padding: 0 20px;
 
-.btn:hover {
-    transform: scale(1.03);
-    background: #00a844;
-}
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 18px;
-    margin-top: 25px;
-    box-shadow: 0 5px 25px rgba(0,0,0,.08);
-}
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
 
-.price {
-    font-size: 38px;
-    font-weight: bold;
-    margin: 20px 0;
-}
+    .logo span {
+      color: #8b5cf6;
+    }
 
-.old-price {
-    text-decoration: line-through;
-    color: #888;
-    font-size: 20px;
-}
+    .nav-btn {
+      padding: 11px 18px;
+      border: 1px solid rgba(139,92,246,.4);
+      border-radius: 10px;
+      background: rgba(139,92,246,.1);
+      color: white;
+      font-weight: 700;
+    }
 
-.countdown {
-    background: #ff1744;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    border-radius: 10px;
-    margin: 20px 0;
-    font-size: 22px;
-    font-weight: bold;
-}
+    /* =========================
+       HERO
+    ========================= */
 
-.features {
-    list-style: none;
-    margin-top: 20px;
-}
+    .hero {
+      min-height: 750px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
 
-.features li {
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-}
+      background:
+        radial-gradient(circle at 50% 10%, rgba(124,58,237,.28), transparent 35%),
+        radial-gradient(circle at 10% 70%, rgba(37,99,235,.12), transparent 30%),
+        #07070b;
+    }
 
-.checkout input {
-    width: 100%;
-    padding: 15px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-}
+    .hero-content {
+      max-width: 900px;
+    }
 
-.bump {
-    background: #fff8d6;
-    border: 2px dashed #e0b000;
-    padding: 20px;
-    border-radius: 12px;
-    margin-top: 20px;
-}
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      margin-bottom: 25px;
 
-.bump label {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    cursor: pointer;
-}
+      border: 1px solid rgba(139,92,246,.35);
+      border-radius: 100px;
 
-.bump input {
-    width: 20px;
-    height: 20px;
-}
+      background: rgba(139,92,246,.08);
+      color: #c4b5fd;
 
-.upsell {
-    text-align: center;
-}
+      font-size: 13px;
+      font-weight: 700;
+    }
 
-.upsell h1 {
-    font-size: 42px;
-    margin-bottom: 15px;
-}
+    h1 {
+      font-size: clamp(45px, 7vw, 82px);
+      line-height: 1.02;
+      letter-spacing: -4px;
+      font-weight: 900;
+      margin-bottom: 25px;
+    }
 
-.warning {
-    background: #fff0f0;
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 20px;
-    color: #b00020;
-}
+    h1 span {
+      background: linear-gradient(90deg, #a78bfa, #60a5fa);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
 
-.success {
-    text-align: center;
-}
+    .hero p {
+      max-width: 680px;
+      margin: auto;
 
-.success h1 {
-    font-size: 45px;
-    color: #00a844;
-}
+      color: #a1a1aa;
+      font-size: 19px;
+    }
 
-.small-btn {
-    background: transparent;
-    color: #555;
-    border: none;
-    cursor: pointer;
-    margin-top: 20px;
-    text-decoration: underline;
-}
+    .hero-buttons {
+      margin-top: 35px;
+    }
 
-@media(max-width:600px) {
-    .hero h1,
-    .upsell h1,
-    .success h1 {
-        font-size: 32px;
+    .primary-btn {
+      border: none;
+      border-radius: 13px;
+      padding: 17px 30px;
+
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      color: white;
+
+      font-size: 16px;
+      font-weight: 800;
+
+      box-shadow: 0 15px 45px rgba(124,58,237,.3);
+
+      transition: .25s;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 60px rgba(124,58,237,.45);
+    }
+
+    /* =========================
+       COUNTDOWN
+    ========================= */
+
+    .countdown {
+      max-width: 700px;
+      margin: 45px auto 0;
+
+      padding: 20px;
+
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+
+      background: rgba(255,255,255,.03);
+    }
+
+    .countdown small {
+      color: #a1a1aa;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    #timer {
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    section {
+      padding: 100px 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .section-title h2 {
+      font-size: 42px;
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: #8f8f98;
+    }
+
+    /* =========================
+       BENEFITS
+    ========================= */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 30px;
+
+      background: #0d0d13;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 18px;
+
+      transition: .25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(139,92,246,.35);
+    }
+
+    .icon {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #92929b;
+      font-size: 14px;
+    }
+
+    /* =========================
+       COURSE
+    ========================= */
+
+    .course-list {
+      max-width: 750px;
+      margin: auto;
+    }
+
+    .lesson {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+
+      padding: 20px;
+      margin-bottom: 10px;
+
+      background: #0d0d13;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 14px;
+    }
+
+    .number {
+      width: 38px;
+      height: 38px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 10px;
+      background: rgba(139,92,246,.15);
+      color: #a78bfa;
+
+      font-weight: 800;
+    }
+
+    .lesson p {
+      color: #92929b;
+      font-size: 13px;
+    }
+
+    /* =========================
+       PRICE
+    ========================= */
+
+    .pricing {
+      max-width: 480px;
+      margin: auto;
+
+      padding: 40px;
+
+      text-align: center;
+
+      background:
+        linear-gradient(#101017, #101017) padding-box,
+        linear-gradient(135deg, #7c3aed, #2563eb) border-box;
+
+      border: 1px solid transparent;
+      border-radius: 25px;
+
+      box-shadow: 0 30px 80px rgba(0,0,0,.4);
+    }
+
+    .old-price {
+      color: #71717a;
+      text-decoration: line-through;
     }
 
     .price {
-        font-size: 30px;
+      font-size: 60px;
+      font-weight: 900;
+      margin: 5px 0;
     }
-}
-</style>
+
+    .price small {
+      font-size: 18px;
+    }
+
+    .price-description {
+      color: #92929b;
+      margin-bottom: 25px;
+    }
+
+    /* =========================
+       CHECKOUT
+    ========================= */
+
+    .page {
+      display: none;
+      min-height: 100vh;
+      padding: 80px 20px;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .checkout {
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .checkout-box {
+      background: #0e0e14;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      padding: 35px;
+    }
+
+    .checkout-box h2 {
+      margin-bottom: 10px;
+    }
+
+    .checkout-box > p {
+      color: #92929b;
+      margin-bottom: 25px;
+    }
+
+    .input {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 12px;
+
+      background: #08080c;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px;
+
+      color: white;
+      outline: none;
+    }
+
+    .input:focus {
+      border-color: #8b5cf6;
+    }
+
+    /* =========================
+       ORDER BUMP
+    ========================= */
+
+    .bump {
+      display: flex;
+      gap: 12px;
+
+      margin: 20px 0;
+      padding: 18px;
+
+      border: 1px dashed #8b5cf6;
+      border-radius: 14px;
+
+      background: rgba(139,92,246,.07);
+    }
+
+    .bump input {
+      width: 20px;
+      height: 20px;
+      accent-color: #8b5cf6;
+    }
+
+    .bump strong {
+      color: #c4b5fd;
+    }
+
+    .bump p {
+      color: #92929b;
+      font-size: 13px;
+    }
+
+    .secure {
+      text-align: center;
+      color: #71717a;
+      font-size: 12px;
+      margin-top: 18px;
+    }
+
+    /* =========================
+       OFFER PAGES
+    ========================= */
+
+    .offer {
+      max-width: 750px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .offer-box {
+      margin-top: 35px;
+      padding: 45px;
+
+      background: #101017;
+      border: 1px solid rgba(139,92,246,.3);
+      border-radius: 25px;
+    }
+
+    .offer-box h2 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .offer-box p {
+      color: #9999a3;
+      margin-bottom: 25px;
+    }
+
+    .offer-price {
+      font-size: 50px;
+      font-weight: 900;
+      margin-bottom: 25px;
+    }
+
+    .secondary-btn {
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px;
+      padding: 14px 25px;
+
+      background: transparent;
+      color: #aaa;
+
+      font-weight: 700;
+      margin-top: 12px;
+    }
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    .success {
+      max-width: 650px;
+      margin: auto;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    .success-icon {
+      font-size: 70px;
+      margin-bottom: 20px;
+    }
+
+    .success h1 {
+      font-size: 50px;
+      letter-spacing: -2px;
+    }
+
+    .success p {
+      color: #92929b;
+      margin: 20px 0 30px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 35px 20px;
+      text-align: center;
+
+      border-top: 1px solid rgba(255,255,255,.06);
+
+      color: #666;
+      font-size: 13px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 800px) {
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .section-title h2 {
+        font-size: 32px;
+      }
+
+      .pricing {
+        padding: 28px 20px;
+      }
+
+      .offer-box {
+        padding: 30px 20px;
+      }
+
+      .offer-box h2 {
+        font-size: 32px;
+      }
+
+      .nav-btn {
+        padding: 9px 13px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ========================= -->
-<!-- PÁGINA DE VENDAS -->
-<!-- ========================= -->
+  <!-- =========================
+       PÁGINA PRINCIPAL
+  ========================= -->
 
-<section id="sales" class="page active">
-    <div class="container">
+  <div id="salesPage" class="page active">
 
-        <div class="hero">
-            <h1>🚀 Seu Produto Incrível</h1>
+    <header>
+      <div class="nav">
+        <div class="logo">
+          WEB<span>STARTER</span>
+        </div>
+
+        <button class="nav-btn" onclick="goToCheckout()">
+          Quero começar
+        </button>
+      </div>
+    </header>
+
+    <main>
+
+      <section class="hero">
+
+        <div class="hero-content">
+
+          <div class="badge">
+            🚀 MINI-CURSO ONLINE • DO ZERO AO PRIMEIRO SITE
+          </div>
+
+          <h1>
+            Crie seu primeiro
+            <span>site profissional.</span>
+          </h1>
+
+          <p>
+            Aprenda HTML e CSS de forma simples e prática,
+            mesmo que você nunca tenha programado antes.
+          </p>
+
+          <div class="hero-buttons">
+            <button class="primary-btn" onclick="goToCheckout()">
+              QUERO APRENDER A CRIAR SITES →
+            </button>
+          </div>
+
+          <div class="countdown">
+            <small>⏰ Condição especial disponível por:</small>
+            <div id="timer">14:59</div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- BENEFÍCIOS -->
+
+      <section>
+
+        <div class="container">
+
+          <div class="section-title">
+            <h2>O que você vai aprender</h2>
+            <p>Um caminho simples para começar na criação de sites.</p>
+          </div>
+
+          <div class="grid">
+
+            <div class="card">
+              <div class="icon">🧱</div>
+              <h3>HTML do zero</h3>
+              <p>
+                Entenda a estrutura de uma página e crie seus primeiros elementos.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="icon">🎨</div>
+              <h3>CSS profissional</h3>
+              <p>
+                Aprenda a transformar páginas simples em interfaces bonitas.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="icon">📱</div>
+              <h3>Sites responsivos</h3>
+              <p>
+                Aprenda conceitos para deixar seus sites melhores no celular.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="icon">🔗</div>
+              <h3>Links e imagens</h3>
+              <p>
+                Aprenda a adicionar imagens, links, botões e outros elementos.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="icon">🌐</div>
+              <h3>Colocar online</h3>
+              <p>
+                Entenda como publicar seu projeto na internet.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="icon">🏆</div>
+              <h3>Projeto final</h3>
+              <p>
+                Construa um projeto completo usando o que aprendeu.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- MÓDULOS -->
+
+      <section>
+
+        <div class="container">
+
+          <div class="section-title">
+            <h2>Por dentro do curso</h2>
+            <p>Conteúdo organizado para você não ficar perdido.</p>
+          </div>
+
+          <div class="course-list">
+
+            <div class="lesson">
+              <div class="number">01</div>
+              <div>
+                <strong>Como funciona a Web</strong>
+                <p>Os conceitos básicos antes de começar.</p>
+              </div>
+            </div>
+
+            <div class="lesson">
+              <div class="number">02</div>
+              <div>
+                <strong>HTML do zero</strong>
+                <p>Estrutura, textos, títulos, listas e muito mais.</p>
+              </div>
+            </div>
+
+            <div class="lesson">
+              <div class="number">03</div>
+              <div>
+                <strong>CSS e design</strong>
+                <p>Cores, fontes, espaçamentos e layouts.</p>
+              </div>
+            </div>
+
+            <div class="lesson">
+              <div class="number">04</div>
+              <div>
+                <strong>Responsividade</strong>
+                <p>Conceitos para adaptar seu site a diferentes telas.</p>
+              </div>
+            </div>
+
+            <div class="lesson">
+              <div class="number">05</div>
+              <div>
+                <strong>Links, imagens e botões</strong>
+                <p>Deixe seu projeto mais completo e interativo.</p>
+              </div>
+            </div>
+
+            <div class="lesson">
+              <div class="number">06</div>
+              <div>
+                <strong>Publicando seu site</strong>
+                <p>Aprenda o básico sobre colocar seu projeto online.</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- PREÇO -->
+
+      <section>
+
+        <div class="container">
+
+          <div class="section-title">
+            <h2>Comece hoje</h2>
+            <p>Tenha acesso ao WEB STARTER.</p>
+          </div>
+
+          <div class="pricing">
+
+            <div class="old-price">
+              De R$ 59,90
+            </div>
+
+            <div class="price">
+              R$ 29<small>,90</small>
+            </div>
+
+            <div class="price-description">
+              Pagamento único
+            </div>
+
+            <button class="primary-btn" onclick="goToCheckout()">
+              QUERO ACESSAR O CURSO
+            </button>
+
+            <div class="secure">
+              🔒 Compra processada por checkout seguro.
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer>
+      © 2026 WEB STARTER — Todos os direitos reservados.
+    </footer>
+
+  </div>
+
+
+  <!-- =========================
+       CHECKOUT
+  ========================= -->
+
+  <div id="checkoutPage" class="page">
+
+    <div class="checkout">
+
+      <div class="checkout-box">
+
+        <h2>Finalize sua inscrição 🚀</h2>
+
+        <p>
+          Preencha seus dados para continuar.
+        </p>
+
+        <input
+          class="input"
+          type="text"
+          id="name"
+          placeholder="Seu nome"
+        >
+
+        <input
+          class="input"
+          type="email"
+          id="email"
+          placeholder="Seu melhor e-mail"
+        >
+
+        <!-- ORDER BUMP -->
+
+        <label class="bump">
+
+          <input
+            type="checkbox"
+            id="orderBump"
+          >
+
+          <span>
+            <strong>🔥 SIM! Quero adicionar o Pack HTML/CSS!</strong>
 
             <p>
-                Aprenda uma nova habilidade e transforme seus resultados.
+              Receba templates prontos para acelerar seus próximos projetos
+              por apenas R$ 9,90.
             </p>
+          </span>
 
-            <div class="countdown">
-                Oferta termina em:
-                <span id="timer">10:00</span>
-            </div>
+        </label>
 
-            <button class="btn" onclick="goTo('checkout')">
-                QUERO COMEÇAR AGORA
-            </button>
+        <button
+          class="primary-btn"
+          style="width:100%;"
+          onclick="fakePurchase()"
+        >
+          CONTINUAR PARA PAGAMENTO →
+        </button>
+
+        <div class="secure">
+          🔒 Seus dados são tratados com segurança.
         </div>
 
-        <div class="card">
-            <h2>O que você vai receber:</h2>
-
-            <ul class="features">
-                <li>✅ Acesso completo ao conteúdo</li>
-                <li>✅ Material exclusivo</li>
-                <li>✅ Atualizações futuras</li>
-                <li>✅ Suporte</li>
-                <li>✅ Acesso imediato</li>
-            </ul>
-
-            <div class="price">
-                <span class="old-price">R$ 197,00</span><br>
-                R$ 47,00
-            </div>
-
-            <button class="btn" onclick="goTo('checkout')">
-                GARANTIR MINHA VAGA
-            </button>
-        </div>
+      </div>
 
     </div>
-</section>
+
+  </div>
 
 
-<!-- ========================= -->
-<!-- CHECKOUT -->
-<!-- ========================= -->
+  <!-- =========================
+       UPSELL 1
+  ========================= -->
 
-<section id="checkout" class="page">
-    <div class="container">
+  <div id="upsellPage" class="page">
 
-        <div class="card checkout">
+    <div class="offer">
 
-            <h1>🛒 Finalizar compra</h1>
+      <div class="badge">
+        🎁 OFERTA ESPECIAL
+      </div>
 
-            <p style="margin-top:10px;">
-                Preencha seus dados para continuar.
-            </p>
+      <div class="offer-box">
 
-            <input id="name" type="text" placeholder="Seu nome">
+        <h2>
+          Espere! Você desbloqueou uma oferta exclusiva.
+        </h2>
 
-            <input id="email" type="email" placeholder="Seu melhor e-mail">
+        <p>
+          Leve a versão PRO do WEB STARTER e tenha materiais extras
+          para continuar praticando.
+        </p>
 
-            <input type="text" placeholder="Número do cartão">
-
-            <input type="text" placeholder="Validade">
-
-            <input type="text" placeholder="CVV">
-
-            <!-- ORDER BUMP -->
-
-            <div class="bump">
-
-                <label>
-                    <input
-                        type="checkbox"
-                        id="orderBump"
-                    >
-
-                    <span>
-                        <strong>🔥 SIM! Quero adicionar o Order Bump!</strong>
-
-                        <br><br>
-
-                        Adicione este conteúdo extra por apenas
-                        <strong>R$ 17,00</strong>.
-                    </span>
-                </label>
-
-            </div>
-
-            <div class="price">
-                Total:
-                R$ <span id="total">47,00</span>
-            </div>
-
-            <button class="btn" onclick="comprar()">
-                🔒 COMPRAR AGORA
-            </button>
-
+        <div class="offer-price">
+          R$ 49,90
         </div>
 
+        <button class="primary-btn" onclick="acceptUpsell()">
+          SIM! QUERO A VERSÃO PRO
+        </button>
+
+        <br>
+
+        <button class="secondary-btn" onclick="goDownsell1()">
+          Não, quero continuar sem a oferta
+        </button>
+
+      </div>
+
     </div>
-</section>
+
+  </div>
 
 
-<!-- ========================= -->
-<!-- UPSELL 1 -->
-<!-- ========================= -->
+  <!-- =========================
+       DOWNSELL 1
+  ========================= -->
 
-<section id="upsell1" class="page">
-    <div class="container">
+  <div id="downsell1Page" class="page">
 
-        <div class="card upsell">
+    <div class="offer">
 
-            <h1>🔥 ESPERE!</h1>
+      <div class="badge">
+        ⚡ ÚLTIMA CHANCE
+      </div>
 
-            <p>
-                Sua compra foi aprovada!
-            </p>
+      <div class="offer-box">
 
-            <br>
+        <h2>
+          Tudo bem! Temos uma opção mais barata.
+        </h2>
 
-            <h2>
-                Temos uma oferta especial para você.
-            </h2>
+        <p>
+          Tenha acesso à versão PRO com uma condição especial.
+        </p>
 
-            <p style="margin-top:15px;">
-                Adicione o Produto Premium por apenas:
-            </p>
-
-            <div class="price">
-                R$ 67,00
-            </div>
-
-            <button class="btn" onclick="goTo('success')">
-                SIM, QUERO ESSA OFERTA
-            </button>
-
-            <br>
-
-            <button class="small-btn" onclick="goTo('downsell1')">
-                Não quero, continuar sem essa oferta
-            </button>
-
+        <div class="offer-price">
+          R$ 29,90
         </div>
 
+        <button class="primary-btn" onclick="acceptDownsell1()">
+          QUERO POR R$ 29,90
+        </button>
+
+        <br>
+
+        <button class="secondary-btn" onclick="goDownsell2()">
+          Não, obrigado
+        </button>
+
+      </div>
+
     </div>
-</section>
+
+  </div>
 
 
-<!-- ========================= -->
-<!-- DOWNSELL 1 -->
-<!-- ========================= -->
+  <!-- =========================
+       DOWNSELL 2
+  ========================= -->
 
-<section id="downsell1" class="page">
-    <div class="container">
+  <div id="downsell2Page" class="page">
 
-        <div class="card upsell">
+    <div class="offer">
 
-            <h1>😮 TEMOS UMA ÚLTIMA CONDIÇÃO</h1>
+      <div class="badge">
+        🔥 OFERTA FINAL
+      </div>
 
-            <p>
-                Tudo bem se a oferta anterior não era para você.
-            </p>
+      <div class="offer-box">
 
-            <br>
+        <h2>
+          Última oportunidade!
+        </h2>
 
-            <h2>
-                Que tal levar o mesmo bônus com desconto?
-            </h2>
+        <p>
+          Leve o Pack de Templates HTML/CSS para praticar
+          seus próximos projetos.
+        </p>
 
-            <div class="price">
-                R$ 37,00
-            </div>
-
-            <button class="btn" onclick="goTo('success')">
-                SIM, QUERO POR R$ 37
-            </button>
-
-            <br>
-
-            <button class="small-btn" onclick="goTo('downsell2')">
-                Não quero essa oferta
-            </button>
-
+        <div class="offer-price">
+          R$ 14,90
         </div>
 
-    </div>
-</section>
+        <button class="primary-btn" onclick="finishPurchase()">
+          SIM! QUERO O PACK
+        </button>
 
+        <br>
 
-<!-- ========================= -->
-<!-- DOWNSELL 2 -->
-<!-- ========================= -->
+        <button class="secondary-btn" onclick="finishPurchase()">
+          Não, finalizar compra
+        </button>
 
-<section id="downsell2" class="page">
-    <div class="container">
-
-        <div class="card upsell">
-
-            <h1>🎁 ÚLTIMA OFERTA</h1>
-
-            <p>
-                Essa é realmente a última oportunidade.
-            </p>
-
-            <br>
-
-            <h2>
-                Leve uma versão simplificada por apenas:
-            </h2>
-
-            <div class="price">
-                R$ 19,00
-            </div>
-
-            <button class="btn" onclick="goTo('success')">
-                QUERO POR R$ 19
-            </button>
-
-            <br>
-
-            <button class="small-btn" onclick="goTo('success')">
-                Não quero, finalizar minha compra
-            </button>
-
-        </div>
+      </div>
 
     </div>
-</section>
+
+  </div>
 
 
-<!-- ========================= -->
-<!-- COMPRA FINALIZADA -->
-<!-- ========================= -->
+  <!-- =========================
+       SUCESSO
+  ========================= -->
 
-<section id="success" class="page">
-    <div class="container">
+  <div id="successPage" class="page">
 
-        <div class="card success">
+    <div class="success">
 
-            <h1>🎉 Compra concluída!</h1>
+      <div class="success-icon">
+        🎉
+      </div>
 
-            <p style="margin-top:20px;">
-                Obrigado pela sua compra!
-            </p>
+      <h1>
+        Compra concluída!
+      </h1>
 
-            <p style="margin-top:10px;">
-                Enviamos as informações de acesso para seu e-mail.
-            </p>
+      <p>
+        Parabéns! Seu acesso ao WEB STARTER foi confirmado.
+      </p>
 
-            <button class="btn" onclick="goTo('sales')">
-                VOLTAR PARA O INÍCIO
-            </button>
-
-        </div>
+      <button class="primary-btn" onclick="goHome()">
+        VOLTAR PARA O INÍCIO
+      </button>
 
     </div>
-</section>
+
+  </div>
 
 
-<script>
+  <script>
 
-// =============================
-// SISTEMA DE NAVEGAÇÃO
-// =============================
+    /* =========================
+       NAVEGAÇÃO
+    ========================= */
 
-function goTo(page) {
+    function showPage(id) {
 
-    document.querySelectorAll(".page")
-        .forEach(p => p.classList.remove("active"));
+      document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+      });
 
-    document.getElementById(page)
-        .classList.add("active");
+      document.getElementById(id).classList.add("active");
 
-    window.scrollTo({
+      window.scrollTo({
         top: 0,
         behavior: "smooth"
-    });
-}
-
-
-// =============================
-// ORDER BUMP + TOTAL
-// =============================
-
-const bump = document.getElementById("orderBump");
-
-bump.addEventListener("change", function() {
-
-    const total = document.getElementById("total");
-
-    if (this.checked) {
-        total.textContent = "64,00";
-    } else {
-        total.textContent = "47,00";
+      });
     }
 
-});
+
+    function goToCheckout() {
+      showPage("checkoutPage");
+    }
 
 
-// =============================
-// COMPRA
-// =============================
+    /* =========================
+       CHECKOUT DEMO
+    ========================= */
 
-function comprar() {
+    function fakePurchase() {
 
-    const name =
-        document.getElementById("name").value;
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
 
-    const email =
-        document.getElementById("email").value;
-
-    if (!name || !email) {
-
-        alert("Preencha seu nome e e-mail.");
-
+      if (!name || !email) {
+        alert("Preencha seu nome e e-mail para continuar.");
         return;
+      }
+
+      /*
+        IMPORTANTE:
+
+        Aqui estamos simulando uma compra.
+
+        Em uma venda real, esta parte será substituída
+        pelo checkout de uma plataforma de pagamento.
+      */
+
+      showPage("upsellPage");
     }
 
-    /*
-        $comprou
 
-        Aqui simulamos que a compra
-        foi aprovada.
+    /* =========================
+       UPSELL
+    ========================= */
 
-        Em um checkout real,
-        essa confirmação viria
-        do gateway de pagamento.
-    */
-
-    const comprou = true;
-
-    if (comprou) {
-
-        goTo("upsell1");
-
+    function acceptUpsell() {
+      finishPurchase();
     }
 
-}
 
+    /* =========================
+       DOWNSELL 1
+    ========================= */
 
-// =============================
-// COUNTDOWN
-// =============================
-
-let tempo = 600;
-
-setInterval(function() {
-
-    let minutos =
-        Math.floor(tempo / 60);
-
-    let segundos =
-        tempo % 60;
-
-    segundos =
-        segundos < 10
-        ? "0" + segundos
-        : segundos;
-
-    document.getElementById("timer")
-        .textContent =
-        minutos + ":" + segundos;
-
-    if (tempo > 0) {
-        tempo--;
+    function goDownsell1() {
+      showPage("downsell1Page");
     }
 
-}, 1000);
 
-</script>
+    function acceptDownsell1() {
+      finishPurchase();
+    }
+
+
+    /* =========================
+       DOWNSELL 2
+    ========================= */
+
+    function goDownsell2() {
+      showPage("downsell2Page");
+    }
+
+
+    function finishPurchase() {
+      showPage("successPage");
+    }
+
+
+    /* =========================
+       HOME
+    ========================= */
+
+    function goHome() {
+      showPage("salesPage");
+    }
+
+
+    /* =========================
+       COUNTDOWN
+    ========================= */
+
+    let time = 15 * 60;
+
+    function updateTimer() {
+
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+
+      document.getElementById("timer").textContent =
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0");
+
+      if (time > 0) {
+        time--;
+      } else {
+        time = 15 * 60;
+      }
+    }
+
+    updateTimer();
+
+    setInterval(updateTimer, 1000);
+
+  </script>
 
 </body>
 </html>
-```
