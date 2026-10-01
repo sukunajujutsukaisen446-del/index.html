@@ -549,7 +549,44 @@
         padding: 9px 13px;
       }
     }
+
+    /* =========================
+       GOOGLE LOGIN
+    ========================= */
+    .google-login {
+      width: 100%;
+      margin: 0 0 18px;
+    }
+
+    .google-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 16px 0;
+      color: #71717a;
+      font-size: 12px;
+    }
+
+    .google-divider::before,
+    .google-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .google-status {
+      display: none;
+      margin: 0 0 15px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(34,197,94,.08);
+      border: 1px solid rgba(34,197,94,.25);
+      color: #86efac;
+      font-size: 13px;
+    }
   </style>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 
 <body>
@@ -805,6 +842,31 @@
           Preencha seus dados para continuar.
         </p>
 
+
+        <!-- LOGIN COM GOOGLE -->
+        <div class="google-login">
+          <div
+            id="g_id_onload"
+            data-client_id="COLOQUE_SEU_CLIENT_ID_AQUI"
+            data-callback="handleGoogleCredential"
+            data-auto_prompt="false">
+          </div>
+
+          <div
+            class="g_id_signin"
+            data-type="standard"
+            data-size="large"
+            data-theme="filled_black"
+            data-text="continue_with"
+            data-shape="rectangular"
+            data-logo_alignment="left">
+          </div>
+        </div>
+
+        <div id="googleStatus" class="google-status"></div>
+
+        <div class="google-divider">ou preencha manualmente</div>
+
         <input
           class="input"
           type="text"
@@ -1044,6 +1106,44 @@
     }
 
 
+
+    /* =========================
+       LOGIN COM GOOGLE
+    ========================= */
+
+    function handleGoogleCredential(response) {
+      try {
+        // O Google Identity Services retorna um JWT.
+        // Este exemplo lê apenas os dados básicos do perfil no navegador.
+        const payload = JSON.parse(
+          decodeURIComponent(
+            atob(response.credential.split(".")[1]
+              .replace(/-/g, "+")
+              .replace(/_/g, "/"))
+              .split("")
+              .map(c => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+              .join("")
+          )
+        );
+
+        if (payload.name) {
+          document.getElementById("name").value = payload.name;
+        }
+
+        if (payload.email) {
+          document.getElementById("email").value = payload.email;
+        }
+
+        const status = document.getElementById("googleStatus");
+        status.style.display = "block";
+        status.textContent = "✅ Google conectado: " + (payload.email || "conta reconhecida");
+
+      } catch (error) {
+        console.error("Erro ao processar login do Google:", error);
+        alert("Não foi possível reconhecer a conta Google. Tente novamente.");
+      }
+    }
+
     /* =========================
        CHECKOUT DEMO
     ========================= */
@@ -1148,3 +1248,5 @@
 
 </body>
 </html>
+WEB_STARTER_GOOGLE.html
+HTML
