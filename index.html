@@ -864,6 +864,53 @@
         </div>
 
         <div id="googleStatus" class="google-status"></div>
+        <!-- ÁREA DO USUÁRIO -->
+<div id="userProfile" style="
+  display:none;
+  background:#101017;
+  border:1px solid rgba(139,92,246,.4);
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:20px;
+  text-align:center;
+">
+
+  <img id="userPhoto"
+       src=""
+       alt="Foto do perfil"
+       style="
+         width:75px;
+         height:75px;
+         border-radius:50%;
+         object-fit:cover;
+         border:2px solid #8b5cf6;
+         margin-bottom:12px;
+       ">
+
+  <h3 id="userName" style="margin-bottom:5px;">
+    Usuário
+  </h3>
+
+  <p id="userEmail" style="
+    color:#a1a1aa;
+    font-size:13px;
+    margin-bottom:15px;
+  "></p>
+
+  <button type="button"
+          onclick="logoutGoogle()"
+          style="
+            padding:10px 18px;
+            border-radius:10px;
+            border:1px solid #8b5cf6;
+            background:rgba(139,92,246,.1);
+            color:white;
+            font-weight:700;
+          ">
+    🚪 Sair da conta
+  </button>
+
+</div>
 
         <div class="google-divider">ou preencha manualmente</div>
 
