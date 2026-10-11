@@ -1179,6 +1179,20 @@
 
         if (payload.email) {
           document.getElementById("email").value = payload.email;
+          // Mostrar perfil do usuário
+const profile = document.getElementById("userProfile");
+
+profile.style.display = "block";
+
+document.getElementById("userName").textContent =
+  payload.name || "Usuário";
+
+document.getElementById("userEmail").textContent =
+  payload.email || "";
+
+if (payload.picture) {
+  document.getElementById("userPhoto").src = payload.picture;
+}
         }
 
         const status = document.getElementById("googleStatus");
@@ -1290,7 +1304,19 @@
     updateTimer();
 
     setInterval(updateTimer, 1000);
+function logoutGoogle() {
+  document.getElementById("userProfile").style.display = "none";
+  document.getElementById("googleStatus").style.display = "none";
 
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
+
+  if (window.google && google.accounts && google.accounts.id) {
+    google.accounts.id.disableAutoSelect();
+  }
+
+  alert("Você saiu do perfil exibido neste site.");
+}
   </script>
 
 </body>
