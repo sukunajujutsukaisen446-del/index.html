@@ -667,6 +667,74 @@ VÍDEO INSTITUCIONAL
 }
 
 
+/* BOTÃO DE CONVITE DO DISCORD */
+.discord-convite {
+  position: fixed;
+  left: 22px;
+  bottom: 22px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px 20px;
+  border-radius: 16px;
+  color: #fff;
+  text-decoration: none;
+
+  background: linear-gradient(135deg, #5865F2, #8B5CF6);
+  box-shadow: 0 8px 25px rgba(88, 101, 242, .35);
+  font-family: Arial, sans-serif;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.discord-convite:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(88, 101, 242, .5);
+}
+
+.discord-icone {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.discord-convite strong,
+.discord-convite small {
+  display: block;
+}
+
+.discord-convite strong {
+  font-size: 13px;
+}
+
+.discord-convite small {
+  margin-top: 4px;
+  font-size: 11px;
+  opacity: .9;
+}
+
+@media (max-width: 480px) {
+  .discord-convite {
+    left: 8px;
+    bottom: 12px;
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .discord-convite strong {
+    font-size: 10px;
+  }
+
+  .discord-convite small {
+    font-size: 9px;
+  }
+
+  .discord-icone {
+    font-size: 24px;
+  }
+}
+
   </style>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
