@@ -614,6 +614,59 @@ VÍDEO INSTITUCIONAL
       color: #86efac;
       font-size: 13px;
     }
+    
+
+/* BOTÃO DE ORÇAMENTO - INSTAGRAM */
+.instagram-orcamento {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: 16px;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #833ab4, #e1306c, #f77737);
+  box-shadow: 0 8px 25px rgba(225, 48, 108, .3);
+  font-family: Arial, sans-serif;
+  transition: transform .25s ease;
+}
+
+.instagram-orcamento:hover {
+  transform: translateY(-4px);
+}
+
+.instagram-icone {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.instagram-orcamento strong,
+.instagram-orcamento small {
+  display: block;
+}
+
+.instagram-orcamento strong {
+  font-size: 14px;
+}
+
+.instagram-orcamento small {
+  margin-top: 4px;
+  font-size: 11px;
+}
+
+@media (max-width: 480px) {
+  .instagram-orcamento {
+    right: 12px;
+    bottom: 12px;
+    padding: 12px 15px;
+  }
+}
+
+
   </style>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
@@ -1360,6 +1413,21 @@ function logoutGoogle() {
   alert("Você saiu do perfil exibido neste site.");
 }
   </script>
+
+<!-- BOTÃO DE ORÇAMENTO PELO INSTAGRAM -->
+<a
+  href="https://www.instagram.com/ally.silva71/"
+  class="instagram-orcamento"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Solicitar orçamento pelo Instagram"
+>
+  <span class="instagram-icone">◎</span>
+  <span>
+    <strong>Solicitar orçamento</strong>
+    <small>Fale comigo pelo Instagram</small>
+  </span>
+</a>
 
 </body>
 </html>
